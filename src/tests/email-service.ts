@@ -10,7 +10,12 @@ describe("EmailService", () => {
   beforeEach(() => {
     const providers = [new ProviderA(), new ProviderB()];
     emailService = new EmailService(providers);
-    email = { to: "test@example.com", subject: "Test", body: "This is a test" };
+    email = {
+      id: "1",
+      to: "test@example.com",
+      subject: "Test",
+      body: "This is a test",
+    };
   });
 
   it("should send email using a provider", async () => {
