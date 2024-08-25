@@ -10,4 +10,12 @@ export class Queue {
     this.emails.add(emailId);
     return true;
   }
+
+  public remove(emailId: string): boolean {
+    if (this.emails.has(emailId)) {
+      this.emails.delete(emailId);
+      return true;
+    }
+    return false;
+  }
 }

@@ -55,6 +55,7 @@ export class EmailService {
         await provider.send(email);
         this.logger.log(`Email sent successfully with ${provider.name}`);
         this.resetCircuitBreaker(provider.name);
+        this.queue.remove(email.id);
         return;
       } catch (error: unknown) {
         if (error instanceof Error) {
@@ -74,6 +75,8 @@ export class EmailService {
     this.logger.error(
       `All providers failed. Last error: ${lastError?.message}`
     );
+
+    this.queue.remove(email.id); // Remove from the queue if all retries fail
     throw lastError;
   }
 
