@@ -76,7 +76,7 @@ export class EmailService {
       `All providers failed. Last error: ${lastError?.message}`
     );
 
-    this.queue.remove(email.id); // Remove from the queue if all retries fail
+    this.queue.remove(email.id);
     throw lastError;
   }
 
